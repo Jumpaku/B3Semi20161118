@@ -53,4 +53,33 @@ public class PointTest {
         assertEquals(36.0, result2.getY(), 1.0e-10);
     }
     
+    /**
+     * Test whether Point class is immutable.
+     */
+    @Test
+    public void testImmutable(){
+        Double x = 4.5;
+        Double y = -0.002;
+        
+        Point p = new Point(x, y);
+        assertEquals(x, p.getX(), 1.0e-10);
+        assertEquals(y, p.getY(), 1.0e-10);
+        
+        p.getX();
+        assertEquals(x, p.getX(), 1.0e-10);
+        assertEquals(y, p.getY(), 1.0e-10);
+
+        p.getY();
+        assertEquals(x, p.getX(), 1.0e-10);
+        assertEquals(y, p.getY(), 1.0e-10);
+
+        Point q = new Point(1.9, 1000.0);
+        Point.internalDivide(p, q, 4.0, 5.2);
+        assertEquals(x, p.getX(), 1.0e-10);
+        assertEquals(y, p.getY(), 1.0e-10);
+        
+        Point.internalDivide(q, p, 4.0, 5.2);
+        assertEquals(x, p.getX(), 1.0e-10);
+        assertEquals(y, p.getY(), 1.0e-10);
+    }
 }
